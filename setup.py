@@ -15,6 +15,6 @@ setup(
     long_description=open('README.txt').read(),
     install_requires=[
         'XlsxWriter>=0.7.0',
-        'xlrd>=0.9.3'
+        'xlrd==1.2.0'
     ],
 )
