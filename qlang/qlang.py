@@ -372,7 +372,7 @@ def get_unicode_ws(ws):
             rows.append(these_vales)
         except QlangError as e:
             m = 'Excel sheet "{}", row {}: {}'
-            m.format(ws.name, i+1, e)
+            m = m.format(ws.name, i+1, e)
             raise QlangError(m)
     return rows
 
