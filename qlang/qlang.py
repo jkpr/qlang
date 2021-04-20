@@ -407,7 +407,7 @@ def f(cell):
         return cell.value
     else:
         m = 'Bad cell type: {}. May be DATE'.format(cell.ctype)
-        raise QlangError(m)
+        print(m)
     return cell.value
 
 
