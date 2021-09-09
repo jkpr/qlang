@@ -343,7 +343,7 @@ def get_unicode_ws(ws):
     for i in range(ws.nrows):
         this_row = ws.row(i)
         try:
-            these_vales = [f(cell) for cell in this_row]
+            these_vales = [f(cell, ws.name, i+1, j) for j, cell in enumerate(this_row, start=1)]
             rows.append(these_vales)
         except QlangError as e:
             m = 'Excel sheet "{}", row {}: {}'
@@ -368,7 +368,7 @@ def space_newline_fix(s):
     return s
 
 
-def f(cell):
+def f(cell, sheet_name, row, col):
     # Can format differently?
     if cell.ctype == xlrd.XL_CELL_BOOLEAN:
         return 'TRUE' if cell.value == 1 else 'FALSE'
@@ -381,7 +381,7 @@ def f(cell):
     elif cell.ctype == xlrd.XL_CELL_NUMBER:
         return cell.value
     else:
-        m = 'Bad cell type: {}. May be DATE'.format(cell.ctype)
+        m = 'Unhandled cell type: {}. May be DATE. Sheet {}, row {}, col {}'.format(cell.ctype, sheet_name, row, col)
         print(m)
     return cell.value
 
